@@ -1,13 +1,14 @@
 package locadora;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.time.format.DateTimeFormatter;
 
 public class Filme {
 	private static Integer id;
@@ -103,9 +104,17 @@ public class Filme {
 
 		System.out.println("Informe o título do filme: ");
 		filme.setNome(scan.nextLine());
-		System.out.println("Informe o valor do filme:");
-		filme.setValor(scan.nextDouble());
-		scan.nextLine();
+
+		while (filme.getValor() == null) {
+			System.out.println("Informe o valor do filme: ");
+			try {
+				filme.setValor(scan.nextDouble());
+				scan.nextLine();
+			} catch (Exception e) {
+				System.err.println("O valor do produto deve ser numérico. Tente novamente.");
+				scan.nextLine();
+			}
+		}
 
 		System.out.println("Selecione uma das classificações: ");
 		for (ClassInd classInd : ClassInd.values()) {
@@ -205,6 +214,7 @@ public class Filme {
 		return null;
 	}
 
+//Impressões ordenadas
 	public static void imprimir(Map<Integer, Filme> mapa) {
 		if (mapa.isEmpty() == true) {
 			System.out.println("Não há itens cadastrados." + "");
@@ -228,4 +238,39 @@ public class Filme {
 			System.out.println(key + " = " + val.toString());
 		});
 	}
+
+	static // Métodos do cliente
+	Map<Integer, Filme> mapaAlugados;
+
+	public static void alugarFilme(Map<Integer, Filme> mapa) {
+		Integer opcao = 0;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Selecione o ID do filme que deseja alugar: ");
+		imprimir(mapa);
+		opcao = scan.nextInt();
+		if (mapa.containsKey(opcao)) {
+
+			mapaAlugados = new HashMap<Integer, Filme>();
+			for (Map.Entry<Integer, Filme> entry : mapa.entrySet()) {
+				if (entry.getKey().equals(opcao)) {
+					mapaAlugados.put(entry.getKey(), entry.getValue());
+				}
+
+			}
+
+		} else
+			System.err.println("o ID " + opcao + " Não está cadastrado");
+
+	}
+
+	public static void verFilmesAlugados() {
+		if (mapaAlugados == null) {
+			System.out.println("Você não possue filmes alugados.");
+		} else {
+			mapaAlugados.forEach((k, v) -> System.out.println(k + ": " + v));
+
+		}
+
+	}
+
 }

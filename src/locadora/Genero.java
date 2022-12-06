@@ -30,8 +30,6 @@ public class Genero {
 
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return genero;

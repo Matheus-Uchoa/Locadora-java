@@ -20,9 +20,11 @@ public class Principal {
 		genero2.add(new Genero("Suspense"));
 		genero2.add(new Genero("Terror"));
 		Map<Integer, Filme> mapaFilmes = new HashMap<Integer, Filme>();
-		mapaFilmes.put(1, new Filme(1, "Doutor jivago", 5.65, "bababababbabababababab", ClassInd.valueOf(2), genero1));
-		mapaFilmes.put(0, new Filme(0, "Donnie Darko", 8d, "lalalalallalalalalalala", ClassInd.valueOf(2), genero2));
-		mapaFilmes.put(2, new Filme(2, "Nosferatu", 4.32, "kakakakakakakakakakka", ClassInd.valueOf(2), genero2));
+		mapaFilmes.put(1, new Filme(1, "Doutor jivago", 5.65, "Baseado no romance de Boris Pasternak, Dr. Jivago é um médico e poeta que inicialmente apoia a revolução Russa, mas, aos poucos, se desilude com o socialismo", ClassInd.valueOf(2), genero1));
+		mapaFilmes.put(0, new Filme(0, "Donnie Darko", 8d, "Donnie Darko é um filme de suspense e sci-fi escrito e dirigido Richard Kelly", ClassInd.valueOf(2), genero2));
+		mapaFilmes.put(2, new Filme(2, "Nosferatu", 4.32, "O corretor de imóveis Hutter precisa vender um castelo cujo proprietário é o excêntrico conde Graf Orlock", ClassInd.valueOf(2), genero2));
+		
+		//Inicialização do login
 		Fazerlogin(mapaFilmes);
 
 	}
